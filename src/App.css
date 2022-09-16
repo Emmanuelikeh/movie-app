@@ -8,8 +8,9 @@ body{
 	flex-wrap: nowrap;
 
 }
-.row > * {
+
+/* .row > * {
   flex-shrink: 1;
   padding-left: 0;
   padding-right: 0;
-}
+} */
