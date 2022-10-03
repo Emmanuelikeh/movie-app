@@ -4,9 +4,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
+import AddFavorites from './components/AddFavourites';
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [favourites, setFavourites] = useState([]);
   const [searchValue, setSearchValue] = useState('');
 
 const getMovieRequest = async(searchValue) => {
@@ -24,6 +26,11 @@ useEffect(() => {
   getMovieRequest(searchValue);
 }, [searchValue]);
 
+const addFavouriteMovie = (movie) => {
+  const newFavouriteList  = [...favourites, movie];
+  setFavourites(newFavouriteList);
+}
+
   return (
     <div className='container-fluid movie-app'>
 
@@ -33,8 +40,19 @@ useEffect(() => {
       </div>
 
       <div className='row d-flex align-items-center mt-4 mb-4'>
-      <MovieList movies={movies}/> 
+      <MovieList movies={movies} handleFavouritesClick={addFavouriteMovie} favouriteComponent = {AddFavorites}/> 
       </div>
+
+
+      <div className='row d-flex align-items-center mt-4 mb-4'>
+        <MovieListHeading heading = "Favourites" />
+      </div>
+
+      <div className='row d-flex align-items-center mt-4 mb-4'>
+      <MovieList movies={favourites} handleFavouritesClick={addFavouriteMovie} favouriteComponent = {AddFavorites}/> 
+      </div>
+
+
       
     </div>
   );
